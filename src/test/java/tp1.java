@@ -1,3 +1,4 @@
+import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -14,6 +15,10 @@ public class tp1 {
   @BeforeMethod
   public void setup() {
     driver = new ChromeDriver();
+
+    // Implicit wait 2 secondes ici
+    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+
     driver.get("https://www.amazon.fr");
     driver.manage().window().maximize();
     // fermer cookies
@@ -36,25 +41,17 @@ public class tp1 {
 
   @Test
   public void test2() {
+
+
     WebElement barreRecherche = driver.findElement(By.id("twotabsearchtextbox"));
     barreRecherche.sendKeys("machine a raclette");
     barreRecherche.sendKeys(Keys.ENTER);
 
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+    // IMPLICIT WAIT ICI
 
     WebElement premierResultat = driver.findElement(By.cssSelector("[data-cel-widget='search_result_1']"));
     premierResultat.click();
     WebElement ajouterPanierBouton = driver.findElement(By.cssSelector("#add-to-cart-button"));
     ajouterPanierBouton.click();
-
-    try {
-      Thread.sleep(1000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
   }
 }
