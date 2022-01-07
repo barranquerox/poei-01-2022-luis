@@ -26,34 +26,25 @@ public class AmazonTest {
   }
 
   @Test
-  public void nintendoSwitchAddToCartPriceTest() {
+  public void laptopAddToCartPriceTest() {
     // Arrange
-    String productName = "Nintendo Switch Oled";
+    String productName = "Ordinateur Portable";
 
     // Act
     MainPage mainPage = new MainPage(driver);
     mainPage.searchProduct(productName);
 
     SearchResultPage searchResultPage = new SearchResultPage(driver);
-    searchResultPage.openResult(1);
+    searchResultPage.openResult(0);
 
     ProductPage productPage = new ProductPage(driver);
     productPage.addToCart();
     productPage.noCoverage();
 
+    ConfirmationAddToCartPage confirmationAddToCartPage = new ConfirmationAddToCartPage(driver);
+    confirmationAddToCartPage.openCart();
+
+    
     // Assert
-  }
-
-  @Test
-  public void machineARacletteTest() {
-    // Arrange
-    String productName = "Machine a raclette";
-
-    // Act
-    MainPage mainPage = new MainPage(driver);
-    mainPage.searchProduct(productName);
-
-    SearchResultPage searchResultPage = new SearchResultPage(driver);
-    searchResultPage.openResult(5);
   }
 }
