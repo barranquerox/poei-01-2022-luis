@@ -35,7 +35,11 @@ public class AmazonTest {
     mainPage.searchProduct(productName);
 
     SearchResultPage searchResultPage = new SearchResultPage(driver);
-    searchResultPage.openResult(0);
+    searchResultPage.openResult(1);
+
+    ProductPage productPage = new ProductPage(driver);
+    productPage.addToCart();
+    productPage.noCoverage();
 
     // Assert
   }
