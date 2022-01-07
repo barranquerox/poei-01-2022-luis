@@ -18,12 +18,15 @@ public class MainPage {
     this.driver = driver;
   }
 
-  public void searchProduct(String productName) {
+  public SearchResultPage searchProduct(String productName) {
     // Trouver l'element et interagir avec l'element
     driver.findElement(searchBarSelector).sendKeys(productName + Keys.ENTER);
 
     // attendre que l'action soit fini
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSearch));
     wait.until(ExpectedConditions.elementToBeClickable(searchResultSelector));
+
+    SearchResultPage searchResultPage = new SearchResultPage(driver);
+    return searchResultPage;
   }
 }

@@ -12,8 +12,11 @@ public class SearchResultPage {
     this.driver = driver;
   }
 
-  public void openResult(int index) {
+  public ProductPage openResult(int index) {
     List<WebElement> listOfResults = driver.findElements(searchResultSelector);
     listOfResults.get(index).click();
+
+    ProductPage productPage = new ProductPage(driver);
+    return productPage;
   }
 }

@@ -28,33 +28,22 @@ public class AmazonTest {
   }
 
   @Test
-  public void laptopAddToCartPriceTest() {
+  public void hpChromebookAddToCartPriceTest() {
     // Arrange
     String productName = "HP Chromebook x360 14a-ca0000sf";
     String expectedPrice = "369,00 €";
 
     // Act
     MainPage mainPage = new MainPage(driver);
-    mainPage.searchProduct(productName);
-
-    SearchResultPage searchResultPage = new SearchResultPage(driver);
-    searchResultPage.openResult(0);
-
-    ProductPage productPage = new ProductPage(driver);
-    productPage.addToCart();
-    productPage.noCoverage();
-
-    ConfirmationAddToCartPage confirmationAddToCartPage = new ConfirmationAddToCartPage(driver);
-    confirmationAddToCartPage.openCart();
-
-    CartPage cartPage = new CartPage(driver);
-    String productPrice = cartPage.getProductPrice(0);
-    String activeCartSubtotal = cartPage.getActiveCartSubtotal();
-    String buyboxCartSubtotal = cartPage.getBuyboxCartSubtotal();
+    CartPage cartPage = mainPage.searchProduct(productName)
+        .openResult(0)
+        .addToCart()
+        .noCoverage()
+        .openCart();
 
     // Assert
-    Assert.assertEquals(productPrice, expectedPrice);
-    Assert.assertEquals(activeCartSubtotal, expectedPrice);
-    Assert.assertEquals(buyboxCartSubtotal, expectedPrice);
+    Assert.assertEquals(cartPage.getProductPrice(0), expectedPrice);
+    Assert.assertEquals(cartPage.getActiveCartSubtotal(), expectedPrice);
+    Assert.assertEquals(cartPage.getBuyboxCartSubtotal(), expectedPrice);
   }
 }
