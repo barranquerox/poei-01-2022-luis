@@ -1,4 +1,5 @@
-import java.util.List;
+package pageobjects.amazon;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
