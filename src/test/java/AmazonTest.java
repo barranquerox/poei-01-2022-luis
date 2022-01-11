@@ -1,7 +1,14 @@
-import org.checkerframework.checker.units.qual.C;
+import java.net.MalformedURLException;
+import java.net.URL;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import pageobjects.amazon.CartPage;
+import pageobjects.amazon.MainPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -14,7 +21,14 @@ public class AmazonTest {
 
   @BeforeMethod
   public void setup() {
-    driver = new ChromeDriver();
+    URL seleniumGridUrl = null;
+    try {
+      seleniumGridUrl = new URL("http://localhost:4444");
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
+    }
+    ChromeOptions chromeOptions = new ChromeOptions();
+    driver = new RemoteWebDriver(seleniumGridUrl, chromeOptions);
     driver.get("https://www.amazon.fr");
     driver.manage().window().maximize();
 
