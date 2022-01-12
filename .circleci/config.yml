@@ -25,13 +25,11 @@ jobs:
       - run:
           name: Execute tests!
           command: |
-            ./gradlew test --tests "AmazonTest.passedTest"
+            ./gradlew test --tests "AmazonTest.hoverTest" --info
 
       - run:
           name: Stop selenium grid
           command: |
             docker-compose -f docker-compose-v3.yml down
-
-
 
 
