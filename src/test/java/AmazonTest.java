@@ -1,9 +1,15 @@
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -17,14 +23,15 @@ public class AmazonTest {
 
   @BeforeMethod
   public void setup() {
-    URL seleniumGridUrl = null;
-    try {
-      seleniumGridUrl = new URL("http://localhost:4444");
-    } catch (MalformedURLException e) {
-      e.printStackTrace();
-    }
-    ChromeOptions chromeOptions = new ChromeOptions();
-    driver = new RemoteWebDriver(seleniumGridUrl, chromeOptions);
+//    URL seleniumGridUrl = null;
+//    try {
+//      seleniumGridUrl = new URL("http://localhost:4444");
+//    } catch (MalformedURLException e) {
+//      e.printStackTrace();
+//    }
+//    ChromeOptions chromeOptions = new ChromeOptions();
+//    driver = new RemoteWebDriver(seleniumGridUrl, chromeOptions);
+    driver = new ChromeDriver();
     driver.get("https://www.amazon.fr");
     driver.manage().window().maximize();
 
@@ -62,5 +69,19 @@ public class AmazonTest {
     MainPage mainPage = new MainPage(driver);
 
     Assert.assertTrue(true);
+  }
+
+  @Test
+  public void hoverTest() {
+    By buttonSelector = By.id("nav-link-accountList");
+    WebElement button = driver.findElement(buttonSelector);
+    Actions hover = new Actions(driver);
+    hover.moveToElement(button);
+    hover.perform();
+
+    By myAccountLinkSelector = By.cssSelector("#nav-al-your-account .nav-title + a");
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+    wait.until(ExpectedConditions.elementToBeClickable(myAccountLinkSelector)).click();
+
   }
 }
