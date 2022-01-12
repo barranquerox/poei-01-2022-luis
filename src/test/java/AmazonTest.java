@@ -27,15 +27,15 @@ public class AmazonTest {
 
   @BeforeMethod
   public void setup() {
-//    URL seleniumGridUrl = null;
-//    try {
-//      seleniumGridUrl = new URL("http://localhost:4444");
-//    } catch (MalformedURLException e) {
-//      e.printStackTrace();
-//    }
-//    ChromeOptions chromeOptions = new ChromeOptions();
-//    driver = new RemoteWebDriver(seleniumGridUrl, chromeOptions);
-    driver = new ChromeDriver();
+    URL seleniumGridUrl = null;
+    try {
+      seleniumGridUrl = new URL("http://localhost:4444");
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
+    }
+    ChromeOptions chromeOptions = new ChromeOptions();
+    driver = new RemoteWebDriver(seleniumGridUrl, chromeOptions);
+    //driver = new ChromeDriver();
     log.debug("Chrome has started");
 
     driver.get("https://www.amazon.fr");
