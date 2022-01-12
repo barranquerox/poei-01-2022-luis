@@ -35,7 +35,7 @@ public class AmazonTest {
     }
     ChromeOptions chromeOptions = new ChromeOptions();
     driver = new RemoteWebDriver(seleniumGridUrl, chromeOptions);
-    //driver = new ChromeDriver();
+    // driver = new ChromeDriver();
     log.debug("Chrome has started");
 
     driver.get("https://www.amazon.fr");
@@ -61,7 +61,7 @@ public class AmazonTest {
   public void hpChromebookAddToCartPriceTest() {
     // Arrange
     String productName = "HP Chromebook x360 14a-ca0000sf";
-    String expectedPrice = "369,00 €";
+    String expectedPrice = "299,00 €";
 
     // Act
     MainPage mainPage = new MainPage(driver);

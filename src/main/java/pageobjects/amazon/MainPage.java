@@ -24,12 +24,15 @@ public class MainPage {
   }
 
   public SearchResultPage searchProduct(String productName) {
+    log.info("Search product: {}", productName);
     // Trouver l'element et interagir avec l'element
     driver.findElement(searchBarSelector).sendKeys(productName + Keys.ENTER);
+    log.info("Write {} in the search bar", productName);
 
     // attendre que l'action soit fini
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSearch));
     wait.until(ExpectedConditions.elementToBeClickable(searchResultSelector));
+    log.info("Search result is displayed");
 
     SearchResultPage searchResultPage = new SearchResultPage(driver);
     return searchResultPage;
