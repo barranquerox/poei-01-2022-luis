@@ -4,6 +4,7 @@ import java.time.Duration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -86,21 +87,29 @@ public class AmazonTest {
   @Test
   public void hoverTest() {
     By buttonSelector = By.id("nav-link-accountList");
+    WebElement myAccountButton;
 
-    WebElement button = driver.findElement(buttonSelector);
-    log.debug("The button was found");
+    try {
+      myAccountButton = driver.findElement(buttonSelector);
+    }
+    catch (NoSuchElementException e) {
+      log.error("The button my account was not found", e);
+      throw e;
+    }
+
+    log.debug("The button my account was found");
 
     Actions hover = new Actions(driver);
-    hover.moveToElement(button);
+    hover.moveToElement(myAccountButton);
     hover.perform();
     log.info("Mouse hover button");
 
     By myAccountLinkSelector = By.cssSelector("#nav-al-your-account .nav-title + a");
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
 
-    WebElement myAccountButton = wait.until(ExpectedConditions.elementToBeClickable(myAccountLinkSelector));
+    WebElement myAccountLink = wait.until(ExpectedConditions.elementToBeClickable(myAccountLinkSelector));
     log.info("The account button was found");
-    myAccountButton.click();
+    myAccountLink.click();
     log.info("The account button was clicked");
 
 
